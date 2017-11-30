@@ -1,0 +1,14 @@
+﻿body input select textarea {
+    max-width: 280px;
+}
+
+footer {
+    font-size: 20px;
+    text-align: center;
+    text-size-adjust: none;
+    background-color: #2874f0;
+    color: #FFFFFF;
+    padding: 30px;
+}
+
+

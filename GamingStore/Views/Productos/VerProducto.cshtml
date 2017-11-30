@@ -1,0 +1,24 @@
+﻿@model GamingStore.Models.Productos
+@{
+    ViewBag.Title = "VerProducto";
+}
+
+<link href="~/Content/VerProducto.css" type="text/css" rel="stylesheet" />
+
+<h2>VerProducto</h2>
+
+
+<form method="post" action="/Carrito/AgregaralCarro/">
+<section id="cuerpoproducto">
+
+    
+
+        <strong>@Model.Nombre</strong>
+        <h1>@Model.Descripcion</h1>
+        <img src="@Model.Url">
+        <h2>@Model.Precio</h2>
+        <button type="button" onclick="Agregacarrito()"></button>
+
+
+</section>
+    </form>
