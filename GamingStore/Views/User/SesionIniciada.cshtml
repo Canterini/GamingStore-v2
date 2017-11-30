@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "SesionIniciada";
+}
+
+@if (Session["Usuario"] != null)
+{
+    <strong>Bienvenido @Session["Usuario"].ToString()</strong>
+
+    <p> Estamos redirecciónando a la Tienda, si no logra conectarse haz click @Html.ActionLink("Aquí", "Index", "Productos")</p>
+    
+
+   
+ 
+
+}
+

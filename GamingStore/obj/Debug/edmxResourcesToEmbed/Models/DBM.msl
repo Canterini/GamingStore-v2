@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GamingStoreDBModelStoreContainer" CdmEntityContainer="GamingStoreDBEntities">
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.Categorias">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoPedido">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.EstadoPedido">
+        <MappingFragment StoreEntitySet="EstadoPedido">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Pedido" ColumnName="Pedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Imagenes">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.Imagenes">
+        <MappingFragment StoreEntitySet="Imagenes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="LocalAdress" ColumnName="LocalAdress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.Productos">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="id_categorias" ColumnName="id_categorias" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosVentaDT">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.ProductosVentaDT">
+        <MappingFragment StoreEntitySet="ProductosVentaDT">
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="VentaDT" ColumnName="VentaDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venta">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.Venta">
+        <MappingFragment StoreEntitySet="Venta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+          <ScalarProperty Name="DetalleVenta" ColumnName="DetalleVenta" />
+          <ScalarProperty Name="CiudadEnvio" ColumnName="CiudadEnvio" />
+          <ScalarProperty Name="DireccionEnvio" ColumnName="DireccionEnvio" />
+          <ScalarProperty Name="EstadoPedido" ColumnName="EstadoPedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VentasDT">
+      <EntityTypeMapping TypeName="GamingStoreDBModel.VentasDT">
+        <MappingFragment StoreEntitySet="VentasDT">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Productos" ColumnName="Productos" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GamingStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="EstadoPedido">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="Int32" Nullable="false" />
+    <Property Name="Pedido" Type="Int32" Nullable="false" />
+    <Property Name="EstadoPedido1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_EstadoPedido_Venta" FromRole="EstadoPedido" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Imagenes">
+    <Key>
+      <PropertyRef Name="idImagen" />
+    </Key>
+    <Property Name="idImagen" Type="Int32" Nullable="false" />
+    <Property Name="Producto" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LocalAdress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Imagenes_Productos" FromRole="Imagenes" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="idProductos" />
+    </Key>
+    <Property Name="idProductos" Type="Int32" Nullable="false" />
+    <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codBarra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Imagenes" Relationship="Self.FK_Imagenes_Productos" FromRole="Productos" ToRole="Imagenes" />
+    <NavigationProperty Name="VentasDT" Relationship="Self.FK_VentasDT_Productos" FromRole="Productos" ToRole="VentasDT" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="idVenta" />
+    </Key>
+    <Property Name="idVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="CiudadEnvio" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DireccionEnvio" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoPedido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_Venta_Cliente" FromRole="Venta" ToRole="Cliente" />
+    <NavigationProperty Name="EstadoPedido1" Relationship="Self.FK_EstadoPedido_Venta" FromRole="Venta" ToRole="EstadoPedido" />
+    <NavigationProperty Name="VentasDT" Relationship="Self.FK_VentasDT_Venta" FromRole="Venta" ToRole="VentasDT" />
+  </EntityType>
+  <EntityType Name="VentasDT">
+    <Key>
+      <PropertyRef Name="idVentasDT" />
+    </Key>
+    <Property Name="idVentasDT" Type="Int32" Nullable="false" />
+    <Property Name="Ventas" Type="Int32" Nullable="false" />
+    <Property Name="idProductos" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_VentasDT_Productos" FromRole="VentasDT" ToRole="Productos" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK_VentasDT_Venta" FromRole="VentasDT" ToRole="Venta" />
+  </EntityType>
+  <Association Name="FK_Venta_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstadoPedido_Venta">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+    <End Role="EstadoPedido" Type="Self.EstadoPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="idVenta" />
+      </Principal>
+      <Dependent Role="EstadoPedido">
+        <PropertyRef Name="Pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Imagenes_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="Imagenes" Type="Self.Imagenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="idProductos" />
+      </Principal>
+      <Dependent Role="Imagenes">
+        <PropertyRef Name="Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VentasDT_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="VentasDT" Type="Self.VentasDT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="idProductos" />
+      </Principal>
+      <Dependent Role="VentasDT">
+        <PropertyRef Name="idProductos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VentasDT_Venta">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+    <End Role="VentasDT" Type="Self.VentasDT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="idVenta" />
+      </Principal>
+      <Dependent Role="VentasDT">
+        <PropertyRef Name="Ventas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GamingStoreDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="EstadoPedido" EntityType="Self.EstadoPedido" />
+    <EntitySet Name="Imagenes" EntityType="Self.Imagenes" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" />
+    <EntitySet Name="VentasDT" EntityType="Self.VentasDT" />
+    <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstadoPedido_Venta" Association="Self.FK_EstadoPedido_Venta">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="EstadoPedido" EntitySet="EstadoPedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Imagenes_Productos" Association="Self.FK_Imagenes_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Imagenes" EntitySet="Imagenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VentasDT_Productos" Association="Self.FK_VentasDT_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="VentasDT" EntitySet="VentasDT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VentasDT_Venta" Association="Self.FK_VentasDT_Venta">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="VentasDT" EntitySet="VentasDT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
